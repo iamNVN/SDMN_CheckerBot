@@ -16,7 +16,7 @@ A Telegram CC Checker Bot with hella lotta features.
 
 - **Anti-Spam System**
     - Users have to wait a certain amount of time before performing the next task
-    - You can customize the time in config/config.php
+    - You can customize the time in ```ENVIRONMENT_VARIABLES`` on Heroku
 
 - **Checker Stats System**
     - Number of Live and Dead CC Checked by a User, and All users will be Visible
