@@ -1,0 +1,71 @@
+{
+    "name": "SDMN Checker Bot",
+    "description": "A Telegram CC Checker Bot with hella lotta features.",
+    "logo": "https://pbs.twimg.com/profile_images/1252291883793027074/RfEhm8yV_400x400.jpg",
+    "keywords": [
+        "Telegram",
+        "Bot",
+        "Modular"
+    ],
+    "website": "https://telegram.me/SDMN_CheckerBot",
+    "repository": "https://github.com/iam-NVN/SDMN_CheckerBot",
+    "env": {
+        "BOT_TOKEN": {
+            "description": "Enter your Bot Token Here. Get it from @Botfather",
+            "value": "",
+            "required": true
+        },
+        "ADMIN_ID": {
+            "description": "Enter the User ID of Admin.",
+            "value": "",
+            "required": true
+        },
+        "LOGS_DUMP_ID": {
+            "description": "Enter the ID of a Group/Channel to store Logs",
+            "value": "",
+            "required": true
+        },
+        "DB_HOST": {
+            "description": "Database URL",
+            "value": "",
+            "required": true
+        },
+        "DB_USERNAME": {
+            "description": "Database Username",
+            "value": "",
+            "required": true
+        },
+        "DB_PASSWORD": {
+            "description": "Database Password",
+            "value": "",
+            "required": true
+        },
+        "DB_NAME": {
+            "description": "Database Name",
+            "value": "",
+            "required": true
+        },
+        "ANTISPAM_TIMER": {
+            "description": "AntiSpam Timer Value in seconds",
+            "value":"20",
+            "required": true
+        },
+        "SK_KEYS": {
+            "description": "Enter SK Keys Here. Separate Multiple Keys with ,",
+            "value": "",
+            "required": false
+        },
+        "TIMEZONE": {
+            "description": "Your Preffered TimeZone",
+            "value": "Asia/Kolkata",
+            "required": false
+        }
+    },
+    "formation": {
+        "web": {
+            "quantity": 1,
+            "size": "free"
+        }
+    },
+    "image": "heroku/php"
+}
