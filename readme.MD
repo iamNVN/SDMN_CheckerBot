@@ -1,5 +1,5 @@
 
-# SDMN CC Checker Bot
+# SDMN CC Checker Bot [Heroku]
 
 A Telegram CC Checker Bot with hella lotta features.
 
@@ -60,16 +60,17 @@ A Telegram CC Checker Bot with hella lotta features.
   
 ## ⚙️ Deployment
 
-### Hosting on Server [MySQL DB Required]
-
- - Download the Files from [Here](https://github.com/iam-NVN/SDMN_CheckerBot/archive/refs/heads/main.zip)
- - Upload it to your Server and Extract it
- - Edit config/config.php file and set Admin ID, Logs ID, DB Credentials and SK Keys
- - Import checkerbot.sql file into your Database through PHPmyAdmin
- - Set Webhook to main.php in root folder of bot  
+### Hosting on Heroku
+    
+ [![Deploy To Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/iam-NVN/SDMN_CheckerBot)
+ - Star and Fork this Repo
+ - Click on the Above Shown ```Deploy To Heroku``` Button
+ - Get Free Database from [Here](https://freesqldatabase.com)
+ - Enter the Vars asked whilst Deploying the App
+ - Set Webhook to main.php in your Heroku app
+   - https://api.telegram.org/bot<BOTTOKEN>/setWebhook?url=https://<HEROKUAPPNAME>.herokuapp.com/main.php
+    Open the URL Replacing ```<BOTTOKEN>``` With your BotToken and ```<HEROKUAPPNAME>``` with your Heroku App Name
  <br />
-
-_**Heroku Deployment Guide will be added soon.**_
 
 
 ## 🎯 Author
