@@ -9,7 +9,7 @@
 | It can be obtained from https://telegram.dog/BotFather
 |
 */
-$config['botToken'] = "1382500231:AAEj9CBl3lgHtM9DkA6er_mwoP3Gxv56sd8";
+$config['botToken'] = "";
 
 /*
 |--------------------------------------------------------------------------
@@ -20,7 +20,7 @@ $config['botToken'] = "1382500231:AAEj9CBl3lgHtM9DkA6er_mwoP3Gxv56sd8";
 | ID can be obtained from https://telegram.dog/username_to_id_bot
 |
 */
-$config['adminID'] = "1050176975";
+$config['adminID'] = "";
 
 /*
 |--------------------------------------------------------------------------
@@ -31,7 +31,7 @@ $config['adminID'] = "1050176975";
 | ID can be obtained from https://telegram.dog/BotFather
 |
 */
-$config['logsID'] =  "1050176975";
+$config['logsID'] =  "";
 
 /*
 |--------------------------------------------------------------------------
