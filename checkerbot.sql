@@ -35,6 +35,14 @@ CREATE TABLE `global_checker_stats` (
   `total_cvv` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `global_checker_stats`
+--
+
+INSERT INTO `global_checker_stats` (`total_checked`, `total_ccn`, `total_cvv`) VALUES
+('0', '0', '0');
+COMMIT;
+
 -- --------------------------------------------------------
 
 --
@@ -78,11 +86,11 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `antispam`
 --
 ALTER TABLE `antispam`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
 COMMIT;
