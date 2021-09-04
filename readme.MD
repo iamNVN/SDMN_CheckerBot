@@ -68,8 +68,8 @@ A Telegram CC Checker Bot with hella lotta features.
  - Get Free Database from [Here](https://freesqldatabase.com)
  - Enter the Vars asked whilst Deploying the App
  - Set Webhook to main.php in your Heroku app
-   - https://api.telegram.org/bot<BOTTOKEN>/setWebhook?url=https://<HEROKUAPPNAME>.herokuapp.com/main.php   <br />
-    Open the URL Replacing ```<BOTTOKEN>``` With your BotToken and ```<HEROKUAPPNAME>``` with your Heroku App Name
+   - https://api.telegram.org/bot[BOTTOKEN]/setWebhook?url=https://[HEROKUAPPNAME].herokuapp.com/main.php   <br />
+    Open the URL Replacing ```[BOTTOKEN]``` With your BotToken and ```[HEROKUAPPNAME]``` with your Heroku App Name
  <br />
 
 
