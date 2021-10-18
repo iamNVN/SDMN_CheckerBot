@@ -48,10 +48,10 @@ $messagesec",
 	'reply_to_message_id'=> $message_id,
     'reply_markup'=>json_encode(['inline_keyboard' => [
         [
-          ['text' => "💠 Created By 💠", 'url' => "t.me/ninjanaveen"]
+          ['text' => "💠 Created By 💠", 'url' => "t.me/CyberDeadshot"]
         ],
         [
-          ['text' => "💎 Source Code 💎", 'url' => "t.me/IndianBotsChat"]
+          ['text' => "💎 Team Alone Demon💎", 'url' => "t.me/TeamAloneDemon"]
         ],
       ], 'resize_keyboard' => true])
         
@@ -102,7 +102,7 @@ if(strpos($message, "/cmds") === 0 || strpos($message, "!cmds") === 0){
 <b>/apikey sk_live_xxx - Add SK Key for /schk gate</b>
 <b>/myapikey | !myapikey - View the added SK Key for /schk gate</b>
 
-<b>ϟ Join <a href='t.me/IndianBots'>IndianBots</a></b>",
+<b>ϟ Join <a href='t.me/TeamAloneDemon'>TeamAloneDemon</a></b>",
     'parse_mode'=>'html',
     'disable_web_page_preview'=>true,
     'reply_markup'=>json_encode(['inline_keyboard'=>[
@@ -124,7 +124,7 @@ if(strpos($message, "/cmds") === 0 || strpos($message, "!cmds") === 0){
 <b>/bin | !bin</b> - Bin Lookup
 <b>/iban | !iban</b> - IBAN Checker
   
-  <b>ϟ Join <a href='t.me/IndianBots'>IndianBots</a></b>",
+  <b>ϟ Join <a href='t.me/TeamAloneDemon'>TeamAloneDemon</a></b>",
     'parse_mode'=>'html',
     'disable_web_page_preview'=>true,
     'reply_markup'=>json_encode(['inline_keyboard'=>[
