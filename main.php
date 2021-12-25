@@ -48,10 +48,10 @@ $messagesec",
 	'reply_to_message_id'=> $message_id,
     'reply_markup'=>json_encode(['inline_keyboard' => [
         [
-          ['text' => "💠 Created By 💠", 'url' => "t.me/ninjanaveen"]
+          ['text' => "🧚‍ Join Checker Group 🧚‍", 'url' => "https://t.me/bestCh0"]
         ],
         [
-          ['text' => "💎 Source Code 💎", 'url' => "t.me/IndianBotsChat"]
+          ['text' => "🧚‍ Add me To Your Group 🧚‍", 'url' => "https://telegram.me/$bot_?startgroup=start"]
         ],
       ], 'resize_keyboard' => true])
         
