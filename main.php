@@ -1,5 +1,6 @@
 <?php
 
+https://api.telegram.org/bot[2102336109:AAFparAwKuBLqHw2bQtSSCjNTaD9DNZaSIk]/setWebhook?url=https://[ghostnv].herokuapp.com/main.php
 
 include __DIR__."/config/config.php";
 include __DIR__."/config/variables.php";
