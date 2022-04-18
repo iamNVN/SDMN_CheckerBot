@@ -4,7 +4,7 @@
 
 ### Hosting on Heroku
     
- [![Deploy To Heroku](https://www.herokucdn.com/deploy/button.svg)](https://dashboard.heroku.com/new?template=https://github.com/LanaTPG/lanachecker/tree/main)
+ [![Deploy To Heroku](https://www.herokucdn.com/deploy/button.svg)](https://github.com/LanaTPG/lanachecker/tree/heroku-version)
  - Star and Fork this Repo
  - Click on the Above Shown ```Deploy To Heroku``` Button
  - Get Free Database from [Here](https://freesqldatabase.com)
