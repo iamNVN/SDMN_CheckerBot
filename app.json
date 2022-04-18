@@ -1,6 +1,6 @@
 {
     "name": "Lana Checker",
-    "description": "Lana.",
+    "description": "Lana",
     "logo": "https://pbs.twimg.com/profile_images/1252291883793027074/RfEhm8yV_400x400.jpg",
     "keywords": [
         "Telegram",
@@ -9,10 +9,10 @@
     ],
     "env": {
         "BOT_TOKEN": {
-            "description": "Bot token",
-            "value": "5361177118:AAHsVhfM2ISynQzJwlZSG11bJM5tiNzG8Ss",
-            "required": true
-        },
+            "description": "Enter your Bot Token Here. Get it from @Botfather",
+            "value": "",
+            "required": false
+        }
     },
     "formation": {
         "web": {
