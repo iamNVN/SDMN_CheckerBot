@@ -20,4 +20,5 @@
             "size": "free"
         }
     },
+    "image": "heroku/php"
 }
