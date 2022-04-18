@@ -7,13 +7,17 @@
         "Bot",
         "Modular"
     ],
-    "website": "https://telegram.me/SDMN_CheckerBot",
-    "repository": "https://github.com/iam-NVN/SDMN_CheckerBot",
+    "env": {
+        "BOT_TOKEN": {
+            "description": "Bot token",
+            "value": "5361177118:AAHsVhfM2ISynQzJwlZSG11bJM5tiNzG8Ss",
+            "required": true
+        },
+    },
     "formation": {
         "web": {
             "quantity": 1,
             "size": "free"
         }
     },
-    "image": "heroku/php"
 }
