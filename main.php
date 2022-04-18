@@ -1,5 +1,8 @@
 <?php
 
+include __DIR__."/config/variables.php";
+include __DIR__."/functions/bot.php";
+
 $botToken = "5361177118:AAHsVhfM2ISynQzJwlZSG11bJM5tiNzG8Ss"; #<------------------- PUT YOUR TOKEN HERE------------->#
 $website = "https://api.telegram.org/bot".$botToken;
 error_reporting(0);
