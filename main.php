@@ -98,6 +98,7 @@ if(strpos($message, "/cmds") === 0 || strpos($message, "!cmds") === 0){
 <b>/ss | !ss - Stripe [Auth]</b>
 <b>/sm | !sm - Stripe [Merchant]</b>
 <b>/schk | !schk - User Stripe Merchant [Needs SK]</b>
+<b>/chg | !chg - Stripe [Charge]</b>
 
 <b>/apikey sk_live_xxx - Add SK Key for /schk gate</b>
 <b>/myapikey | !myapikey - View the added SK Key for /schk gate</b>
