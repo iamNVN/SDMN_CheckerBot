@@ -120,7 +120,7 @@ Country: <b><ins>$bname</ins> - 💲<ins>$currency</ins></b>
 Issuers Contact: <b><ins>$phone</ins></b>
 <b>━━━━━━━━━━━━━
 Checked By <a href='tg://user?id=$userId'>$firstname</a></b>
-<b>Bot By: <a href='t.me/ninjanaveen'>ɴɪɴᴊᴀ ɴᴀᴠᴇᴇɴ</a></b>",
+<b>Bot By: <a href='t.me/Mabidax_The_Lost_Noob'>TheLostNoo</a></b>",
               'parse_mode'=>'html',
               'reply_to_message_id'=> $message_id,
               'disable_web_page_preview'=>'true']);}
