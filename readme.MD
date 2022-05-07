@@ -62,7 +62,7 @@ A Telegram CC Checker Bot with hella lotta features.
 
 ### Hosting on Heroku
     
- [![Deploy To Heroku](https://www.herokucdn.com/deploy/button.svg)](https://dashboard.heroku.com/new?template=https%3A%2F%2Fgithub.com%2Fiam-NVN%2FSDMN_CheckerBot%2Fblob%2Fheroku-version)
+ [![Deploy To Heroku](https://www.herokucdn.com/deploy/button.svg)](https://dashboard.heroku.com/new?template=https://github.com/Dhatterimaakichut/SDMN_CheckerBot)
  - Star and Fork this Repo
  - Click on the Above Shown ```Deploy To Heroku``` Button
  - Get Free Database from [Here](https://freesqldatabase.com)
@@ -70,11 +70,13 @@ A Telegram CC Checker Bot with hella lotta features.
  - Import checkerbot.sql file into your Database through PHPmyAdmin
  - Enter the Vars asked whilst Deploying the App
  - Set Webhook to main.php in your Heroku app
-   - https://api.telegram.org/bot[BOTTOKEN]/setWebhook?url=https://[HEROKUAPPNAME].herokuapp.com/main.php   <br />
+   - https://api.telegram.org/bot5091817901:AAEWztn1fe68E-JEy2Zx5Xvs2XCgs8nKXe4/setWebhook?url=https://karmachkbot.herokuapp.com/main.php   <br />
     Open the URL Replacing ```[BOTTOKEN]``` With your BotToken and ```[HEROKUAPPNAME]``` with your Heroku App Name
  <br />
-
-
+webhook-powerful-93356
+https://api.telegram.org/bot5091817901:AAEWztn1fe68E-JEy2Zx5Xvs2XCgs8nKXe4/setWebhook?url=https://karmachkbot.herokuapp.com/main.php
+e20adcc7ba4024c1964a0bee7c5092f604787f3ce788f00a40447fc08276
+https://github.com/Dhatterimaakichut/karmachk
 ## 🎯 Author
 
 - [@iam-NVN](https://www.github.com/octokatherine)

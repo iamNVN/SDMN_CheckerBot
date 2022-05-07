@@ -17,14 +17,14 @@ include_once __DIR__."/../functions/functions.php";
 
 
 ////////////====[MUTE]====////////////
-if(strpos($message, "/schk ") === 0 || strpos($message, "!schk ") === 0){   
+if(strpos($message, "/sch ") === 0 || strpos($message, ".sch") === 0){   
     $antispam = antispamCheck($userId);
     addUser($userId);
     
     if($antispam != False){
       bot('sendmessage',[
         'chat_id'=>$chat_id,
-        'text'=>"[<u>ANTI SPAM</u>] Try again after <b>$antispam</b>s.",
+        'text'=>"[<u>Chala Ja Bsdk</u>] Try again after <b>$antispam</b>s.",
         'parse_mode'=>'html',
         'reply_to_message_id'=> $message_id
       ]);
@@ -136,7 +136,7 @@ if(strpos($message, "/schk ") === 0 || strpos($message, "!schk ") === 0){
                     'message_id'=>$messageidtoedit,
                     'text'=>"<b>Card:</b> <code>$lista</code>
 <b>Status -» Dead ❌
-Response -» <code>SK Key is Dead</code>
+Response -» <code>Ma MA Mar Gaya Madarchod</code>
 Gateway -» Stripe Auth 1
 Time -» <b>$time</b><b>s</b>
 
@@ -150,7 +150,7 @@ Time -» <b>$time</b><b>s</b>
 <b>----------------------------</b>
 
 <b>Checked By <a href='tg://user?id=$userId'>$firstname</a></b>
-<b>Bot By: <a href='t.me/Mabidax_The_Lost_Noob'>TheLostNooB</a></b>",
+<b>Bot By: <a href='t.me/Arceus69_Xd'>[ ＡＲＣ Σ ＵＳ </Oғғʟɪɴᴇ> ]</a></b>",
                     'parse_mode'=>'html',
                     'disable_web_page_preview'=>'true'
                     
@@ -218,7 +218,7 @@ Time -» <b>$time</b><b>s</b>
 <b>----------------------------</b>
 
 <b>Checked By <a href='tg://user?id=$userId'>$firstname</a></b>
-<b>Bot By: <a href='t.me/Mabidax_The_Lost_Noob'>TheLostNooB</a></b>",
+<b>Bot By: <a href='t.me/Mabidax_The_Lost_Noob'>Mabidax</a></b>",
                 'parse_mode'=>'html',
                 'disable_web_page_preview'=>'true'
                 
@@ -247,7 +247,7 @@ Time -» <b>$time</b><b>s</b>
 <b>----------------------------</b>
 
 <b>Checked By <a href='tg://user?id=$userId'>$firstname</a></b>
-<b>Bot By: <a href='t.me/Mabidax_The_Lost_Noob'>TheLostNooB</a></b>",
+<b>Bot By: <a href='t.me/Mabidax_The_Lost_Noob'>Mabidax</a></b>",
                 'parse_mode'=>'html',
                 'disable_web_page_preview'=>'true'
                 

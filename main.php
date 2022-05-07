@@ -48,10 +48,10 @@ $messagesec",
 	'reply_to_message_id'=> $message_id,
     'reply_markup'=>json_encode(['inline_keyboard' => [
         [
-          ['text' => "💠 Created By 💠", 'url' => "https://t.me/Mabidax_The_Lost_Noob"]
+          ['text' => "💠 Created By 💠", 'url' => "t.me/Arceus69_Xd"]
         ],
         [
-          ['text' => "💎 Owner 💎", 'url' => "https://t.me/Mabidax_The_Lost_Noob"]
+          ['text' => "💎 Source Code 💎", 'url' => "t.me/ninjanaveen"]
         ],
       ], 'resize_keyboard' => true])
         
@@ -95,15 +95,25 @@ if(strpos($message, "/cmds") === 0 || strpos($message, "!cmds") === 0){
     'message_id'=>$callbackmessageid,
     'text'=>"<b>━━CC Checker Gates━━</b>
   
-<b>/ss | !ss - Stripe [Auth]</b>
-<b>/sm | !sm - Stripe [Merchant]</b>
-<b>/schk | !schk - User Stripe Merchant [Needs SK]</b>
-<b>/chg | !chg - Stripe [Charge]</b>
+<b>/ss | .ss - Stripe [Auth]</b>
+<b>/ss2 | .ss2 - Stripe - 2[Auth]</b>
+<b>/chk | .chk - Stripe [Merchant]</b>
+<b>/sch | .sch - User Stripe Merchant [Needs SK]</b>
+<b>/b3 | .b3 - Braintree Merchant [Auth]</b>
+<b>/br | .br - Braintree Merchant Gate-2[Auth]</b>
+<b>/chg | .chg - Stripe 20$ Chrg [Charge]</b>
+<b>/ch2 | .ch2 - Stripe 8.50$ Chrg [Charge]</b>
+<b>/shp | .shp - Shopify 8.50$ [Charge]</b>
+<b>/sh2 | .sh2 - Shopify 10$ [Charge]</b>
+<b>/pp | .pp - Paypal [Auth]</b>
+<b>/sch | .sch - User Stripe Merchant [Needs SK]</b>
+<b>/gf | .gf - For GirlFrnd [Needs Male Gender]</b>
+<b>/rnd | .rnd - For Randi [Needs Dick]</b>
 
 <b>/apikey sk_live_xxx - Add SK Key for /schk gate</b>
 <b>/myapikey | !myapikey - View the added SK Key for /schk gate</b>
 
-<b>ϟ Join <a href='https://t.me/Mabidax_The_Lost_Noobs'>Mabidax</a></b>",
+<b>ϟ Join <a href='t.me/Not_pro_noober'>Dazai Osamu</a></b>",
     'parse_mode'=>'html',
     'disable_web_page_preview'=>true,
     'reply_markup'=>json_encode(['inline_keyboard'=>[
@@ -125,7 +135,7 @@ if(strpos($message, "/cmds") === 0 || strpos($message, "!cmds") === 0){
 <b>/bin | !bin</b> - Bin Lookup
 <b>/iban | !iban</b> - IBAN Checker
   
-  <b>ϟ Join <a href='https://t.me/Mabidax_The_Lost_Noob'>Mabidax</a></b>",
+  <b>ϟ Join <a href='t.me/IndianBots'>IndianBots</a></b>",
     'parse_mode'=>'html',
     'disable_web_page_preview'=>true,
     'reply_markup'=>json_encode(['inline_keyboard'=>[
