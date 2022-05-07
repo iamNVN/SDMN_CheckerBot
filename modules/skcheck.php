@@ -89,7 +89,7 @@ Response -» Provided Secret Key is Dead
 Time -» <b>$time</b><b>s</b></b>
 
 <b>Checked By <a href='tg://user?id=$userId'>$firstname</a></b>
-<b>Bot By: <a href='t.me/ninjanaveen'>ɴɪɴᴊᴀ ɴᴀᴠᴇᴇɴ</a></b>",
+<b>Bot By: <a href='https://t.me/Mabidax_The_Lost_Noob'>TheLostNooB</a></b>",
                 'parse_mode'=>'html',
                 'disable_web_page_preview'=>'true'
                 
