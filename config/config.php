@@ -20,7 +20,7 @@ $config['botToken'] = $_ENV['5550772770:AAGBtYiYd6Ko_tWyPOO_8WtRj3XspPNgYlM'];
 | ID can be obtained from https://telegram.dog/username_to_id_bot
 |
 */
-$config['adminID'] = $_ENV['ADMIN_ID'];
+$config['adminID'] = $_ENV['870917923'];
 
 /*
 |--------------------------------------------------------------------------
