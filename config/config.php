@@ -31,7 +31,7 @@ $config['adminID'] = $_ENV['ADMIN_ID'];
 | ID can be obtained from https://telegram.dog/BotFather
 |
 */
-$config['logsID'] =  $_ENV['LOGS_DUMP_ID'];
+$config['logsID'] =  $_ENV['-1001805609995'];
 
 /*
 |--------------------------------------------------------------------------
