@@ -52,10 +52,10 @@ $config['timeZone'] =  $_ENV['TIMEZONE'];
 | Database to Store User Data
 |
 */
-$config['db']['hostname'] =  $_ENV['DB_HOST'];
-$config['db']['username'] =  $_ENV['DB_USERNAME'];
-$config['db']['password'] =  $_ENV['DB_PASSWORD'];
-$config['db']['database'] =  $_ENV['DB_NAME'];
+$config['db']['hostname'] =  $_ENV['http://mysql-92140-0.cloudclusters.net'];
+$config['db']['username'] =  $_ENV['admin'];
+$config['db']['password'] =  $_ENV['kaIqtq1G'];
+$config['db']['database'] =  $_ENV['admin'];
 
 /*
 |--------------------------------------------------------------------------
