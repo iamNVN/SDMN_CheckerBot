@@ -50,11 +50,11 @@ $config['timeZone'] =  $_ENV['TIMEZONE'];
 | Database
 |--------------------------------------------------------------------------
 | Database to Store User Data
-|	sql6528149	sql6528149	
+|	
 */
 $config['db']['hostname'] =  $_ENV['sql6.freesqldatabase.com'];
 $config['db']['username'] =  $_ENV['sql6528149'];
-$config['db']['password'] =  $_ENV['kaIqtq1G'];
+$config['db']['password'] =  $_ENV['UcgCnXy4jn'];
 $config['db']['database'] =  $_ENV['sql6528149'];
 
 /*
