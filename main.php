@@ -48,10 +48,10 @@ $messagesec",
 	'reply_to_message_id'=> $message_id,
     'reply_markup'=>json_encode(['inline_keyboard' => [
         [
-          ['text' => "💠 Created By 💠", 'url' => "t.me/Inconigto1"]
+          ['text' => "💠 Created By 💠", 'url' => "https://t.me/Inconigto1"]
         ],
         [
-          ['text' => "💎 Source Code 💎", 'url' => "t.me/DNFGHBot"]
+          ['text' => "💎 Source Code 💎", 'url' => "https://t.me/DNFGHBot"]
         ],
       ], 'resize_keyboard' => true])
         
