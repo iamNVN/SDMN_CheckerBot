@@ -74,7 +74,7 @@ A Telegram CC Checker Bot with hella lotta features.
 
 ## 🎯 Author
 
-- [@iam-NVN](https://www.github.com/octokatherine)
+- [@iamNVN](https://iamnvn.in)
 
 ## 💸 Donations 
 If you're feeling generous and want to support this project, you can donate 
