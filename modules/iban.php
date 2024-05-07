@@ -24,7 +24,7 @@ if(strpos($message, "/iban ") === 0){
     if($antispam != False){
       bot('sendmessage',[
         'chat_id'=>$chat_id,
-        'text'=>"[<u>ANTI SPAM</u>] Try again after <b>$antispam</b>s.",
+        'text'=>"[<u> Surprise MotherFucker! ANTI SPAM</u>] Try again after <b>$antispam</b>s.",
         'parse_mode'=>'html',
         'reply_to_message_id'=> $message_id,
       ]);
@@ -33,7 +33,7 @@ if(strpos($message, "/iban ") === 0){
     }else{
         $messageidtoedit1 = bot('sendmessage',[
           'chat_id'=>$chat_id,
-          'text'=>"<b>Wait for Result...</b>",
+          'text'=>"<b>U Can Jerk Off While I Provide The Result...</b>",
           'parse_mode'=>'html',
           'reply_to_message_id'=> $message_id,
 
@@ -74,7 +74,7 @@ if(strpos($message, "/iban ") === 0){
 <ins>Time:</ins>  <code>$timetaken</code><code>s</code>
 <b>━━━━━━━━━━━━━
 Checked By <a href='tg://user?id=$userId'>$firstname</a></b>
-<b>Bot By: <a href='t.me/ninjanaveen'>ɴɪɴᴊᴀ ɴᴀᴠᴇᴇɴ</a></b>",
+<b>Bot By: <a href='t.me/Mabidax_The_Lost_Noob'>Mabidax</a></b>",
                 'parse_mode'=>'html',
                 'disable_web_page_preview'=>'true'
                 
@@ -88,7 +88,7 @@ Checked By <a href='tg://user?id=$userId'>$firstname</a></b>
 <b>━━━━━━━━━━</b>
 
 <b>Checked By <a href='tg://user?id=$userId'>$firstname</a></b>
-<b>Bot By: <a href='t.me/ninjanaveen'>ɴɪɴᴊᴀ ɴᴀᴠᴇᴇɴ</a></b>",
+<b>Bot By: <a href='t.me/Mabidax_The_Lost_Noob'>Mabidax</a></b>",
                 'parse_mode'=>'html',
                 'disable_web_page_preview'=>'true'
                 
@@ -98,9 +98,9 @@ Checked By <a href='tg://user?id=$userId'>$firstname</a></b>
           bot('editMessageText',[
             'chat_id'=>$chat_id,
             'message_id'=>$messageidtoedit,
-            'text'=>"<b>Never Gonna Give you Up!
+            'text'=>"<b>Madar Chod
 
-Provide a Valid SK KEYYYY!</b>",
+Valid IBAN DE!</b>",
             'parse_mode'=>'html',
             'disable_web_page_preview'=>'true'
             

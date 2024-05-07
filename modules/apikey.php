@@ -25,7 +25,7 @@ if(strpos($message, "/apikey ") === 0 || strpos($message, "!apikey ") === 0){
     if($antispam != False){
       bot('sendmessage',[
         'chat_id'=>$chat_id,
-        'text'=>"[<u>ANTI SPAM</u>] Try again after <b>$antispam</b>s.",
+        'text'=>"[<u>Surprise MotherFucker!! ANTI SPAM</u>] Try again after <b>$antispam</b>s.",
         'parse_mode'=>'html',
         'reply_to_message_id'=> $message_id
       ]);
@@ -92,7 +92,7 @@ You can now check cards using /schk</b>",
                 bot('editMessageText',[
                     'chat_id'=>$chat_id,
                     'message_id'=>$messageidtoedit,
-                    'text'=>"<b>This SK Key is Dead! Provide me a Live SK Key</b>",
+                    'text'=>"<b>This SK Key is Dead! Live SK DE Bhosdike </b>",
                     'parse_mode'=>'html',
                     'disable_web_page_preview'=>'true'
                     
