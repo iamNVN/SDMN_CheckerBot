@@ -55,92 +55,148 @@ while (true) {
             
             echo "📨 Processing update: " . $update['update_id'] . "\n";
             
-            // Обрабатываем только сообщения
-            if (isset($update['message'])) {
-                // Устанавливаем глобальные переменные как в webhook
-                $GLOBALS['update'] = $update;
-                $GLOBALS['chat_id'] = $update['message']['chat']['id'];
-                $GLOBALS['userId'] = $update['message']['from']['id'];
-                $GLOBALS['username'] = $update['message']['from']['username'] ?? $update['message']['from']['first_name'];
-                $GLOBALS['message'] = $update['message']['text'] ?? '';
-                $GLOBALS['message_id'] = $update['message']['message_id'];
-                $GLOBALS['firstname'] = $update['message']['from']['first_name'] ?? '';
-                $GLOBALS['lastname'] = $update['message']['from']['last_name'] ?? '';
-                $GLOBALS['chattype'] = $update['message']['chat']['type'];
+            // Обрабатываем сообщения и callback queries
+            if (isset($update['message']) || isset($update['callback_query'])) {
                 
-                // Устанавливаем переменные для включаемых файлов
-                $chat_id = $update['message']['chat']['id'];
-                $userId = $update['message']['from']['id'];
-                $firstname = $update['message']['from']['first_name'] ?? '';
-                $lastname = $update['message']['from']['last_name'] ?? '';
-                $username = $update['message']['from']['username'] ?? '';
-                $chattype = $update['message']['chat']['type'];
-                $message = $update['message']['text'] ?? '';
-                $message_id = $update['message']['message_id'];
-                
-                echo "👤 From: @{$username} ({$userId})\n";
-                echo "💭 Message: {$message}\n";
+                // Определяем тип обновления и устанавливаем переменные
+                if (isset($update['message'])) {
+                    // Обычное сообщение
+                    $GLOBALS['update'] = $update;
+                    $GLOBALS['chat_id'] = $update['message']['chat']['id'];
+                    $GLOBALS['userId'] = $update['message']['from']['id'];
+                    $GLOBALS['username'] = $update['message']['from']['username'] ?? $update['message']['from']['first_name'];
+                    $GLOBALS['message'] = $update['message']['text'] ?? '';
+                    $GLOBALS['message_id'] = $update['message']['message_id'];
+                    $GLOBALS['firstname'] = $update['message']['from']['first_name'] ?? '';
+                    $GLOBALS['lastname'] = $update['message']['from']['last_name'] ?? '';
+                    $GLOBALS['chattype'] = $update['message']['chat']['type'];
+                    $GLOBALS['data'] = '';
+                    
+                    $chat_id = $update['message']['chat']['id'];
+                    $userId = $update['message']['from']['id'];
+                    $firstname = $update['message']['from']['first_name'] ?? '';
+                    $lastname = $update['message']['from']['last_name'] ?? '';
+                    $username = $update['message']['from']['username'] ?? '';
+                    $chattype = $update['message']['chat']['type'];
+                    $message = $update['message']['text'] ?? '';
+                    $message_id = $update['message']['message_id'];
+                    $data = '';
+                    
+                    echo "👤 From: @{$username} ({$userId})\n";
+                    echo "💭 Message: {$message}\n";
+                    
+                } elseif (isset($update['callback_query'])) {
+                    // Callback query
+                    $GLOBALS['update'] = $update;
+                    $GLOBALS['chat_id'] = $update['callback_query']['message']['chat']['id'];
+                    $GLOBALS['userId'] = $update['callback_query']['from']['id'];
+                    $GLOBALS['username'] = $update['callback_query']['from']['username'] ?? $update['callback_query']['from']['first_name'];
+                    $GLOBALS['message'] = '';
+                    $GLOBALS['message_id'] = null;
+                    $GLOBALS['firstname'] = $update['callback_query']['from']['first_name'] ?? '';
+                    $GLOBALS['lastname'] = $update['callback_query']['from']['last_name'] ?? '';
+                    $GLOBALS['chattype'] = $update['callback_query']['message']['chat']['type'];
+                    $GLOBALS['data'] = $update['callback_query']['data'];
+                    
+                    $chat_id = $update['callback_query']['message']['chat']['id'];
+                    $userId = $update['callback_query']['from']['id'];
+                    $firstname = $update['callback_query']['from']['first_name'] ?? '';
+                    $lastname = $update['callback_query']['from']['last_name'] ?? '';
+                    $username = $update['callback_query']['from']['username'] ?? '';
+                    $chattype = $update['callback_query']['message']['chat']['type'];
+                    $message = '';
+                    $message_id = null;
+                    $data = $update['callback_query']['data'];
+                    
+                    // Устанавливаем callback-специфичные переменные
+                    $callbackchatid = $chat_id;
+                    $callbackmessageid = $update['callback_query']['message']['message_id'];
+                    $callbackfname = $firstname;
+                    $callbacklname = $lastname;
+                    $callbackusername = $username;
+                    $callbackuserid = $userId;
+                    
+                    echo "👤 Callback from: @{$username} ({$userId})\n";
+                    echo "🎯 Data: {$data}\n";
+                }
                 
                 try {
-                    // Включаем основной файл бота без variables.php
-                    include_once 'config/config.php';
-                    include_once 'functions/bot.php';
-                    include_once 'functions/functions.php';
-                    include_once 'functions/db.php';
+                    // Включаем файлы в правильном порядке
+                    if (!function_exists('bot')) {
+                        include_once 'functions/bot.php';
+                    }
+                    if (!function_exists('addUser')) {
+                        include_once 'functions/db.php';
+                    }
+                    if (!function_exists('getUsernameById')) {
+                        include_once 'functions/functions.php';
+                    }
                     
-                    date_default_timezone_set($config['timeZone']);
+                    // Устанавливаем часовой пояс
+                    if (isset($config['timeZone'])) {
+                        date_default_timezone_set($config['timeZone']);
+                    }
+                    
+                    // Включаем variables.php для дополнительных переменных
+                    include_once 'config/variables.php';
+                    
+                    // Включаем основные команды
+                    include_once 'modules/commands.php';
                     
                     // Включаем модули
-                    include_once 'modules/admin.php';
-                    include_once 'modules/skcheck.php';
-                    include_once 'modules/binlookup.php';
-                    include_once 'modules/iban.php';
-                    include_once 'modules/stats.php';
-                    include_once 'modules/me.php';
-                    include_once 'modules/apikey.php';
+                    $modules = [
+                        'modules/admin.php',
+                        'modules/skcheck.php', 
+                        'modules/binlookup.php',
+                        'modules/iban.php',
+                        'modules/stats.php',
+                        'modules/me.php',
+                        'modules/apikey.php'
+                    ];
                     
-                    // Включаем чекеры (они могут иметь проблемы с путями)
-                    if (file_exists('modules/checker/ss.php')) {
-                        include_once 'modules/checker/ss.php';
-                    }
-                    if (file_exists('modules/checker/schk.php')) {
-                        include_once 'modules/checker/schk.php';
-                    }
-                    if (file_exists('modules/checker/sm.php')) {
-                        include_once 'modules/checker/sm.php';
-                    }
-                    
-                    // Обработка команды /start
-                    if (strpos($message, "/start") === 0) {
-                        if (!isBanned($userId) && !isMuted($userId)) {
-                            $messagesec = "";
-                            if ($userId == $config['adminID']) {
-                                $messagesec = "<b>Type /admin to know admin commands</b>";
-                            }
-                            
-                            addUser($userId);
-                            bot('sendmessage', [
-                                'chat_id' => $chat_id,
-                                'text' => "<b>Hello @$username,
-
-Type /cmds to know all my commands!</b>
-
-$messagesec",
-                                'parse_mode' => 'html',
-                                'reply_to_message_id' => $message_id,
-                                'reply_markup' => json_encode(['inline_keyboard' => [
-                                    [
-                                        ['text' => '📋 Commands', 'callback_data' => 'cmds'],
-                                        ['text' => '📊 Stats', 'callback_data' => 'stats']
-                                    ]
-                                ]])
-                            ]);
-                            echo "✅ Sent welcome message\n";
+                    foreach ($modules as $module) {
+                        if (file_exists($module)) {
+                            include_once $module;
                         }
+                    }
+                    
+                    // Включаем чекеры
+                    $checkers = [
+                        'modules/checker/ss.php',
+                        'modules/checker/schk.php', 
+                        'modules/checker/sm.php'
+                    ];
+                    
+                    foreach ($checkers as $checker) {
+                        if (file_exists($checker)) {
+                            include_once $checker;
+                        }
+                    }
+                    
+                    // Ответ на callback query если это callback - универсальная обработка
+                    $has_callback = false;
+                    $callback_id = null;
+                    
+                    if (is_array($update) && isset($update['callback_query'])) {
+                        $has_callback = true;
+                        $callback_id = $update['callback_query']['id'];
+                    } elseif (is_object($update) && isset($update->callback_query)) {
+                        $has_callback = true;
+                        $callback_id = $update->callback_query->id;
+                    }
+                    
+                    if ($has_callback && $callback_id) {
+                        bot('answerCallbackQuery', [
+                            'callback_query_id' => $callback_id
+                        ]);
                     }
                     
                 } catch (Exception $e) {
                     echo "❌ Error processing message: " . $e->getMessage() . "\n";
+                } catch (ParseError $e) {
+                    echo "❌ Parse error: " . $e->getMessage() . " in " . $e->getFile() . " on line " . $e->getLine() . "\n";
+                } catch (Error $e) {
+                    echo "❌ Fatal error: " . $e->getMessage() . " in " . $e->getFile() . " on line " . $e->getLine() . "\n";
                 }
                 
                 echo "---\n";

@@ -324,4 +324,21 @@ function updateAPIKey($userID,$apikey){
 
 }
 
+// Дополнительные функции для статистики
+function countUsers(){
+    global $conn;
+    $result = mysqli_query($conn,"SELECT COUNT(*) as count FROM users");
+    if($result){
+        $data = $result->fetch_assoc();
+        return $data['count'];
+    }
+    return 0;
+}
+
+function countChecks(){
+    global $conn;
+    $stats = fetchGlobalStats();
+    return $stats ? $stats['total_checked'] : 0;
+}
+
 ?>

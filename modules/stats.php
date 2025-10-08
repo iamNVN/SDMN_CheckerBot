@@ -57,3 +57,36 @@ if(strpos($message, "/stats") === 0 || strpos($message, "!stats") === 0){
 
 
 ?>
+
+{
+  "configurations": [
+    {
+      "type": "php",
+      "request": "launch",
+      "name": "Launch PHP Bot",
+      "program": "${workspaceFolder}/SDMN_CheckerBot/${input:phpFile}",
+      "runtimeArgs": [
+        "-dxdebug.start_with_request=yes"
+      ],
+      "env": {
+        "XDEBUG_MODE": "debug,develop"
+      },
+      "port": 9003
+    }
+  ],
+  "inputs": [
+    {
+      "type": "pickString",
+      "id": "phpFile",
+      "description": "Select the PHP file to debug",
+      "options": [
+        "main.php",
+        "run_bot.php",
+        "start_bot.php",
+        "test_callback.php",
+        "test_db.php",
+        "diagnose.php"
+      ]
+    }
+  ]
+}
