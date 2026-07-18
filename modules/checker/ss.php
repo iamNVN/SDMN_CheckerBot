@@ -9,11 +9,37 @@
 */
 
 
-include __DIR__."/../config/config.php";
-include __DIR__."/../config/variables.php";
-include_once __DIR__."/../functions/bot.php";
-include_once __DIR__."/../functions/db.php";
-include_once __DIR__."/../functions/functions.php";
+// Корректные пути для include файлов
+$root_dir = dirname(dirname(__DIR__));
+if (file_exists($root_dir . '/config/config.php')) {
+    include_once $root_dir . '/config/config.php';
+} else {
+    include_once __DIR__ . '/../../config/config.php';
+}
+
+if (file_exists($root_dir . '/config/variables.php')) {
+    include_once $root_dir . '/config/variables.php';
+} else {
+    include_once __DIR__ . '/../../config/variables.php';
+}
+
+if (file_exists($root_dir . '/functions/bot.php')) {
+    include_once $root_dir . '/functions/bot.php';
+} else {
+    include_once __DIR__ . '/../../functions/bot.php';
+}
+
+if (file_exists($root_dir . '/functions/db.php')) {
+    include_once $root_dir . '/functions/db.php';
+} else {
+    include_once __DIR__ . '/../../functions/db.php';
+}
+
+if (file_exists($root_dir . '/functions/functions.php')) {
+    include_once $root_dir . '/functions/functions.php';
+} else {
+    include_once __DIR__ . '/../../functions/functions.php';
+}
 
 
 ////////////====[MUTE]====////////////

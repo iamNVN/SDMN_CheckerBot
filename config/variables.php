@@ -1,38 +1,41 @@
 <?php
 
-$update = json_decode(file_get_contents("php://input"));
+// Безопасная обработка Telegram webhook данных
+$input = file_get_contents("php://input");
+$update = json_decode($input);
 
-$chat_id = $update->message->chat->id;
+// Проверяем, что данные получены корректно
+if (!$update) {
+    // Если запуск через run_bot.php, используем глобальные переменные
+    if (isset($GLOBALS['update'])) {
+        // Конвертируем массив в объект рекурсивно
+        $update = json_decode(json_encode($GLOBALS['update']));
+    } else {
+        $update = new stdClass();
+    }
+}
 
-$userId = $update->message->from->id;
+// Безопасное извлечение данных сообщения
+$chat_id = isset($update->message->chat->id) ? $update->message->chat->id : (isset($GLOBALS['chat_id']) ? $GLOBALS['chat_id'] : null);
+$userId = isset($update->message->from->id) ? $update->message->from->id : (isset($GLOBALS['userId']) ? $GLOBALS['userId'] : null);
+$firstname = isset($update->message->from->first_name) ? $update->message->from->first_name : (isset($GLOBALS['firstname']) ? $GLOBALS['firstname'] : '');
+$lastname = isset($update->message->from->last_name) ? $update->message->from->last_name : (isset($GLOBALS['lastname']) ? $GLOBALS['lastname'] : '');
+$username = isset($update->message->from->username) ? $update->message->from->username : (isset($GLOBALS['username']) ? $GLOBALS['username'] : '');
+$chattype = isset($update->message->chat->type) ? $update->message->chat->type : (isset($GLOBALS['chattype']) ? $GLOBALS['chattype'] : '');
+$message = isset($update->message->text) ? $update->message->text : (isset($GLOBALS['message']) ? $GLOBALS['message'] : '');
+$message_id = isset($update->message->message_id) ? $update->message->message_id : (isset($GLOBALS['message_id']) ? $GLOBALS['message_id'] : null);
 
-$firstname = $update->message->from->first_name;
+// Безопасное извлечение данных reply сообщения
+$replytomessageis = isset($update->message->reply_to_message->text) ? $update->message->reply_to_message->text : '';
 
-$lastname = $update->message->from->last_name;
-
-$username = $update->message->from->username;
-
-$chattype = $update->message->chat->type;
-
-$message = $update->message->text;
-
-$message_id = $update->message->message_id;
-
-$replytomessageis = $update->message->reply_to_message->text;
-
-$data = $update->callback_query->data;
-
-$callbackfname = $update->callback_query->from->first_name;
-
-$callbacklname = $update->callback_query->from->last_name;
-
-$callbackusername = $update->callback_query->from->username;
-
-$callbackchatid = $update->callback_query->message->chat->id;
-
-$callbackuserid = $update->callback_query->message->reply_to_message->from->id;
-
-$callbackmessageid = $update->callback_query->message->message_id;
+// Безопасное извлечение данных callback query
+$data = isset($update->callback_query->data) ? $update->callback_query->data : '';
+$callbackfname = isset($update->callback_query->from->first_name) ? $update->callback_query->from->first_name : '';
+$callbacklname = isset($update->callback_query->from->last_name) ? $update->callback_query->from->last_name : '';
+$callbackusername = isset($update->callback_query->from->username) ? $update->callback_query->from->username : '';
+$callbackchatid = isset($update->callback_query->message->chat->id) ? $update->callback_query->message->chat->id : null;
+$callbackuserid = isset($update->callback_query->message->reply_to_message->from->id) ? $update->callback_query->message->reply_to_message->from->id : null;
+$callbackmessageid = isset($update->callback_query->message->message_id) ? $update->callback_query->message->message_id : null;
 
 
 $live_array = array(
